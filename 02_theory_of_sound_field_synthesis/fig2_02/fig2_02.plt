@@ -38,7 +38,7 @@ set tmargin 0.4
 set lmargin 4
 set rmargin 1
 
-plot 'concave_array.dat' binary matrix with image,\
+plot 'concave_array.dat' binary matrix u 1:2:(4*$3) with image,\
     '<export LC_ALL=C && sort -g data/concave_array.txt' @array_inactive w l,\
     'concave_array_selected.txt' @array_active w l
 

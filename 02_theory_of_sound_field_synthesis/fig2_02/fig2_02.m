@@ -10,20 +10,13 @@ f = 700; % / Hz
 xs = [0 2.5 0];
 src = 'ps';
 
-
 %% ===== Toolbox settings ================================================
+conf = SFS_config;
 conf.resolution = 1000; % / samples
 conf.xref = [0 -3 0]; % / m
-conf.dimension = '2.5D';
-conf.c = 343; % / m/s
-conf.driving_functions = 'default';
-conf.phase = 0; % / rad
-conf.usenormalisation = true;
-conf.plot.useplot = false;
 conf.usetapwin = false;
 conf.tapwinlen = 0.3;
 conf.showprogress = true;
-
 
 %% ===== Secondary Sources ===============================================
 % Create an array with convex and concave elements
@@ -32,7 +25,6 @@ conf.secondary_sources.size = 2; % / m
 conf.secondary_sources.center = [0 0 0]; % / m
 conf.secondary_sources.geometry = 'circle';
 conf.secondary_sources.number = 1000;
-conf.secondary_sources.x0 = [];
 % get secondary sources and store them, to do this calculation only once
 x0 = secondary_source_positions(conf);
 % first half
@@ -49,7 +41,8 @@ x_02 = bsxfun(@plus,h1,[-4 0 0 0 0 0 0]);    % second left
 x03 = bsxfun(@plus,h2,[6 0 0 0 0 0 0]);      % third right
 x_03 = bsxfun(@plus,h2,[-6 0 0 0 0 0 0]);    % third left
 x0 = [x_03; x_02; x_01; x00; x01; x02; x03]; % put all together
-conf.secondary_sources.x0 = x0;              % store it
+conf.secondary_sources.geometry = 'custom';
+conf.secondary_sources.x0 = x0;              % store as custom array
 gp_save_loudspeakers('data/concave_array.txt',x0);
 x0 = secondary_source_selection(x0,xs,src);
 % detect the different parts of the array and store them with an empty line
@@ -80,7 +73,9 @@ for ii=2:size(x0,1)
     end
 end
 
-
 %% ===== Wave Field Synthesis ============================================
 [P,x,y] = sound_field_mono_wfs(X,Y,Z,xs,src,f,conf);
+P = normalization(P,'point');
 gp_save_matrix('data/concave_array.dat',x,y,real(P));
+
+rmpath('../../matlab');
