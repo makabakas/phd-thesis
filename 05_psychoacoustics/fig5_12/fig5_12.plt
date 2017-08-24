@@ -24,9 +24,6 @@ set output 'fig5_12.tex'
 
 unset key 
 
-#set xrange [100:20000]
-#set yrange [-10:15]
-
 set multiplot
 set size 0.469,0.5
 # 1
