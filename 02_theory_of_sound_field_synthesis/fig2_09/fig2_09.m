@@ -11,16 +11,9 @@ src = 'pw';
 f = 1000; % / Hz
 
 %% ===== Toolbox settings ================================================
+conf = SFS_config;
 conf.resolution = 1000; % / samples
-conf.xref = [0 0 0]; % / m
-conf.dimension = '2.5D';
-conf.c = 343; % / m/s
-conf.driving_functions = 'default';
-conf.phase = 0; % / rad
-conf.usenormalisation = true;
-conf.plot.useplot = false;
 conf.usetapwin = false;
-conf.tapwinlen = 0.3;
 conf.showprogress = true;
 
 %% ===== Secondary Sources ===============================================
@@ -28,12 +21,9 @@ conf.secondary_sources.size = 3; % / m
 conf.secondary_sources.center = [0 0 0]; % / m
 conf.secondary_sources.geometry = 'circle';
 conf.secondary_sources.number = 1000;
-conf.secondary_sources.x0 = [];
-% get secondary sources and store them, to do this calculation only once
-x0 = secondary_source_positions(conf);
-conf.secondary_sources.x0 = x0;
-% store complete array and repeat the first loudspeaker in order to draw a
+% Store complete array and repeat the first loudspeaker in order to draw a
 % complete circle
+x0 = secondary_source_positions(conf);
 gp_save_loudspeakers('data/array.txt',[x0; x0(1,:)]);
 
 %% ===== Wave Field Synthesis ============================================
@@ -42,3 +32,5 @@ file = sprintf('data/sound_field_wfs_pw_f%iHz_nls%i.dat',f, ...
                conf.secondary_sources.number);
 gp_save_matrix(file,x,y,real(P));
 gp_save_loudspeakers('data/array_wfs_pw.txt',x0);
+
+rmpath('../../matlab');
