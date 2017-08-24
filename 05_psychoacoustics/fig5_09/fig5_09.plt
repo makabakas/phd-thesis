@@ -43,18 +43,18 @@ set ylabel 'sound pressure / dB' offset 1,0
 set lmargin 6
 set rmargin 0.5
 set label 1  '\ft loudspeaker spacing $17$\,cm' at 1.4,420 center front tc ls 101
-set label 2  '\ft \acs{WFS}'             at 1,200 center front tc ls 101
-set label 3  '\ft $(-0.1,0,0)$\,m'      at 0.11, -7 front tc ls 12
-set label 4  '\ft $(-0.35,0,0)$\,m'     at 0.11, 30 front tc ls 13
-set label 5  '\ft $(-0.6,0,0)$\,m'      at 0.11, 68 front tc ls 14
-set label 6  '\ft $(-0.85,0,0)$\,m'     at 0.11,114 front tc ls 15
-set label 7  '\ft $(-1.1,0,0)$\,m'      at 0.11,149 front tc ls 16
-set label 8  '\ft $(-1.35,0,0)$\,m'     at 0.11,188 front tc ls 17
-set label 9  '\ft $(-0.35,-0.5,0)$\,m'  at 0.11,231 front tc ls 18
-set label 10 '\ft $(-0.6,-0.5,0)$\,m'   at 0.11,274 front tc ls 19
-set label 11 '\ft $(-0.85,-0.5,0)$\,m'  at 0.11,314 front tc ls 20
-set label 12 '\ft $(-1.1,-0.5,0)$\,m'   at 0.11,354 front tc ls 21
-set label 13 '\ft $(-1.35,-0.5,0)$\,m'  at 0.11,390 front tc ls 22
+set label 2  '\ft \acs{WFS}'            at 1,200 center front tc ls 101
+set label 3  '\ft $(-0.1,0,0)$\,m'      at 0.11, -9   front tc ls 12
+set label 4  '\ft $(-0.35,0,0)$\,m'     at 0.11, 33.5 front tc ls 13
+set label 5  '\ft $(-0.6,0,0)$\,m'      at 0.11, 69.5 front tc ls 14
+set label 6  '\ft $(-0.85,0,0)$\,m'     at 0.11,113.5 front tc ls 15
+set label 7  '\ft $(-1.1,0,0)$\,m'      at 0.11,150.5 front tc ls 16
+set label 8  '\ft $(-1.35,0,0)$\,m'     at 0.11,190.5 front tc ls 17
+set label 9  '\ft $(-0.35,-0.5,0)$\,m'  at 0.11,232.5 front tc ls 18
+set label 10 '\ft $(-0.6,-0.5,0)$\,m'   at 0.11,275   front tc ls 19
+set label 11 '\ft $(-0.85,-0.5,0)$\,m'  at 0.11,312   front tc ls 20
+set label 12 '\ft $(-1.1,-0.5,0)$\,m'   at 0.11,351   front tc ls 21
+set label 13 '\ft $(-1.35,-0.5,0)$\,m'  at 0.11,390   front tc ls 22
 plot for [ii=2:12] 'coloration_wfs_freq_resp_moving.txt' u ($1/1000):(db(column(ii))-35+ii*40):ii w l ls ii+10
 
 call 'plot.plt' 'fig5_09'

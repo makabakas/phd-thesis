@@ -1,50 +1,49 @@
-%%
-%	Script to create reference, anchor, stereo and WFS impulse responses at
-%	different listening positions
-%
-%   WFS size is 56 speaker, output is written as 720 Channel .wav
-%	First to channel will contain computed impulse responses for both ears
-%
-%   Christoph Hohnerlein, 03.11.13
-%   Hagen Wierstorf, 27.01.14
-%
-%%
-
 clear all
-addpath('sfs-master-0.2.2');
-SFS_start;
-conf=SFS_config_example;
-conf.array='circle';
-L=3;
-no_of_speaker=56;
-conf.dx0 = pi*L/no_of_speaker;
-conf.useplot =1;
-conf.N = 2^13;
+addpath('../fig5_08/src');
 
-conf.usehcomp = false;
-irs=dummy_irs;
-conf.usehpre=1;
-conf.hpreflow  = findhprelow(no_of_speaker,L);
-conf.hprefhigh = findhprehigh(no_of_speaker,L,conf.hpreflow);
+%% ===== Configuration ===================================================
+X = [ ...
+    [ 0.00  0.00  0.00]; ...
+    [-0.25  0.00  0.00]; ...
+    [-0.50  0.00  0.00]; ...
+    [-0.75  0.00  0.00]; ...
+    [-1.00  0.00  0.00]; ...
+    [-1.25  0.00  0.00]; ...
+    [-0.25 -0.50  0.00]; ...
+    [-0.50 -0.50  0.00]; ...
+    [-0.75 -0.50  0.00]; ...
+    [-1.00 -0.50  0.00]; ...
+    [-1.25 -0.50  0.00]; ...
+    ];
+X = bsxfun(@minus,X,[0.1 0 0]);
+head_orientation = pi/2;
+xs = [0 2.5 0];
+src = 'ps';
 
+%% ===== Toolbox settings ================================================
+conf=SFS_config;
+conf.fs = 48000;
+conf.N = 8192;
+conf.ir.usehcomp = false;
+conf.delayline.resampling = 'pm';
+conf.delayline.resamplingfactor = 8;
+conf.delayline.resamplingorder = 64;
+conf.delayline.filter = 'lagrange';
+conf.delayline.filterorder = 9; 
+conf.secondary_sources.number = 56;
+conf.hprefhigh = findhprefhigh(conf);
+hrtf = dummy_irs(conf);
+spectra = zeros(4097,size(X,1));
 
-norm=1;
-
-
-list_pos = [[0 0];[-0.25 0];[-0.5 0];[-0.75 0];[-1 0];[-1.25 0]; ...
-    [-0.25 -0.5];[-0.5 -0.5];[-0.75 -0.5];[-1 -0.5];[-1.25 -0.5]];
-list_pos = bsxfun(@minus,list_pos,[0.1 0]);
-
-% WFS
-ffts=zeros(4096,size(list_pos,1));
-for ii=1:size(list_pos,1)
-    ir_wfs = ir_wfs_25d(list_pos(ii,:), pi/2, [0 2.5], 'ps',L,irs,conf);
-    if norm==1
-        ir_wfs = ir_wfs./max(max(abs(ir_wfs)));
-    end
-    [a,pf,f]=easyfft(ir_wfs(:,1),conf);
-    ffts(:,ii)=a;
+%% ===== Wave Field Synthesis ============================================
+for ii=1:size(X,1)
+    ir = ir_wfs(X(ii,:),head_orientation,xs,src,hrtf,conf);
+    ir = ir ./ max(abs(ir(:)));
+    [magnitude,~,f] = spectrum_from_signal(ir(:,1),conf);
+    spectra(:,ii) = magnitude;
+    progress_bar(ii,size(X,1));
 end
 
-gp_save('../../fig5_09/data/coloration_wfs_freq_resp_moving.txt',f',ffts);
-SFS_stop;
+gp_save('data/coloration_wfs_freq_resp_moving.txt',[f spectra]);
+
+rmpath('../fig5_08/src');
