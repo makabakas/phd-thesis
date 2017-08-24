@@ -15,12 +15,9 @@ Bash:
 ```Bash
 $ gnuplot fig5_08.plt
 ```
-
 If you want to recalculate the frequency responses yourself, you have to run the
 following commands in Matlab/Octave before running gnuplot:
 ```Matlab
->> cd matlab
->> freqresp_WFS_center
->> freqresp_WFS_offcenter
+>> fig5_08
 ```
-This will override the txt-files in the data directory.
+This will override the txt-files in the `data` directory.
