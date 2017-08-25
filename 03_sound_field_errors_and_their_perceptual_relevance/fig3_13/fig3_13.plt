@@ -42,20 +42,20 @@ load 'yborder.cfg'
 set ylabel '$y$ / m' offset 1.5,0
 set lmargin 4
 set rmargin 0
-plot 'nfchoa.dat' binary matrix u 1:2:(64*real($3)) with image,\
+plot 'nfchoa.dat' binary matrix with image,\
      'array.txt' @array_active w l
 load 'noborder.cfg'
 set lmargin 2
 set rmargin 2
 set label 11 '\ft 64 secondary sources'
-plot 'nfchoa_nls64.dat' binary matrix u 1:2:(32*real($3)) with image,\
+plot 'nfchoa_nls64.dat' binary matrix with image,\
      'array_nls64.txt' @array_active w p
 load 'xborder.cfg'
 set xlabel '$x$ / m' offset 0,1
 set lmargin 0
 set rmargin 4
 set label 1 '\ft band-limited \acs{NFC-HOA}'
-plot 'nfchoa_nls64_band_limited.dat' binary matrix u 1:2:(4*real($3)) with image,\
+plot 'nfchoa_nls64_band_limited.dat' binary matrix with image,\
      'array_nls64.txt' @array_active w p
 set tmargin 0.85
 set bmargin 2.1
@@ -65,13 +65,13 @@ set lmargin 4
 set rmargin 0
 set label 1 '\ft \acs{WFS}'
 unset label 11
-plot 'wfs.dat' binary matrix u 1:2:(real(-$3)) with image,\
+plot 'wfs.dat' binary matrix with image,\
      'array.txt' @array_inactive w l,\
      'array_wfs.txt' @array_active w l
 load 'xborder.cfg'
 set lmargin 2
 set rmargin 2
-plot 'wfs_nls64.dat' binary matrix u 1:2:(real(-$3)) with image,\
+plot 'wfs_nls64.dat' binary matrix with image,\
      'array_nls64.txt'  @array_inactive w p,\
      'array_wfs_nls64.txt' @array_active w p
 unset multiplot
