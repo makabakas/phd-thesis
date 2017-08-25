@@ -42,11 +42,11 @@ set tmargin 0
 set multiplot layout 1,2
 set label 1 'no tapering' at -1,-1.7 left front
 set label 2 '\ft edge waves' at 0.8,-1.4 center front
-set arrow from 0.8,-1.3 to 0.00,-0.4 front size 0.05,25
-set arrow from 0.8,-1.3 to 0.52,-0.4 front size 0.05,25
+set arrow from 0.8,-1.3 to 0.00,-0.4 front size 0.05,25 lw 2
+set arrow from 0.8,-1.3 to 0.52,-0.4 front size 0.05,25 lw 2
 set lmargin 4.4
 set rmargin 0
-plot 'wfs_notapering.dat' binary matrix u 1:2:(0.2*real(-$3)) with image,\
+plot 'wfs_notapering.dat' binary matrix with image,\
      'array.txt' @array_active w l
 unset arrow
 set label 1 'tapering'
@@ -57,7 +57,7 @@ set format y ''
 set ytics scale 0
 set lmargin 4
 set rmargin 0.4
-plot 'wfs_tapering.dat' binary matrix u 1:2:(0.2*real(-$3)) with image,\
+plot 'wfs_tapering.dat' binary matrix with image,\
      'array.txt' @array_active w l
 unset multiplot
 
