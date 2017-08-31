@@ -12,10 +12,8 @@ driving functions are given within the figure. Parameters: f = 1 kHz.
 
 Matlab/Octave:
 ```Matlab
->> amplitudes_2D
->> amplitudes_25D
+>> fig3_01
 ```
-Note that the above two commands will need some time (~2 h) to finish.
 
 Bash:
 ```Bash
