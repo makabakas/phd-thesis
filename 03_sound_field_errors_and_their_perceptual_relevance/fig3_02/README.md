@@ -13,9 +13,7 @@ default in this thesis. Parameters: x_ref = (0,−2,0) m, f = 1 kHz.
 
 Matlab/Octave:
 ```Matlab
->> amplitudes_moving_source_2D
->> amplitudes_moving_source_25D
->> amplitudes_moving_source_25D_ps
+>> fig3_02
 ```
 
 Bash:
