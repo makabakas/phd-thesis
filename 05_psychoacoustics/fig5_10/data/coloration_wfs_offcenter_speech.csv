@@ -1,0 +1,12 @@
+# WFS, circular loudspeaker array, offcenter listening position, speech
+# stimuli, rating, 95%_confidence_interval
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_ref.wav,             -0.9673,    0.0305
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_stereo.wav,           0.1350,    0.2411
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_nls0014.wav,         -0.0093,    0.1950
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_nls0028.wav,         -0.2325,    0.2272
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_nls0056.wav,         -0.1404,    0.2030
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_nls0112.wav,         -0.4246,    0.1697
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_nls0224.wav,         -0.6440,    0.1479
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_nls0448.wav,         -0.8184,    0.0778
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_stereo_anchor.wav,   -0.7065,    0.0968
+experiments/2015-10-01_wfs_coloration/brs/wfs_circular_offcenter_anchor.wav,           0.7906,    0.1473
